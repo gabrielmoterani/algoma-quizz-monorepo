@@ -11,5 +11,6 @@ const config: Omit<Config, "content"> = {
     },
   },
   plugins: [],
-};
-export default config;
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+}
+export default config
