@@ -10,7 +10,7 @@ const config: Omit<Config, "content"> = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
 }
 export default config
