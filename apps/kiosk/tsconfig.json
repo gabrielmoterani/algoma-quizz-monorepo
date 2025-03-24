@@ -1,7 +1,12 @@
 {
   "extends": "@electron-toolkit/tsconfig/tsconfig.json",
   "compilerOptions": {
-    "types": ["electron-vite/node"]
+    "types": ["electron-vite/node"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/orm": ["../../packages/orm"]
+    }
   },
   "references": [{ "path": "../../packages/typescript-config/node.json" }, { "path": "../../packages/typescript-config/web.json" }]
 }

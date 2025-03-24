@@ -1,7 +1,8 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
-import { join } from 'path'
+import { join } from 'node:path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { registerIpcHandlers } from './ipc-handlers'
 
 function createWindow(): void {
   // Create the browser window.
@@ -28,7 +29,9 @@ function createWindow(): void {
 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
+  // biome-ignore lint/complexity/useLiteralKeys: env data
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+    // biome-ignore lint/complexity/useLiteralKeys: env data
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
@@ -49,11 +52,15 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
+  // Register IPC handlers for file operations
+  registerIpcHandlers()
+
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
   createWindow()
 
+  // biome-ignore lint/complexity/useArrowFunction: not needed
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
