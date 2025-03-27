@@ -18,7 +18,7 @@ export default defineConfig({
       alias: {
         '@renderer': resolve('src/renderer/src'),
         '@': resolve('src'),
-        '@/orm': resolve('../../packages/orm')
+        '$/orm': resolve('../../packages/orm')
       }
     },
     plugins: [react()]

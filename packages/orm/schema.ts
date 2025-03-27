@@ -18,7 +18,7 @@ export const campuses = pgTable("campuses", {
 export const students = pgTable("students", {
   id: uuid("id").primaryKey().defaultRandom(),
   cardData: jsonb("card_data"),
-  fullName: varchar("full_name"),
+  nickName: varchar("nick_name"),
   email: varchar("email"),
   campusId: uuid("campus_id").references(() => campuses.id),
   age: integer("age"),

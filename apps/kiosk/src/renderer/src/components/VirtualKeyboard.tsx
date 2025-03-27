@@ -52,6 +52,7 @@ const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({ inputRefs, onClose })
     // Add click event listener to document
     document.addEventListener('mousedown', handleClickOutside)
 
+    // biome-ignore lint/complexity/noForEach: Rule needed for array iteration
     inputRefs.forEach((ref) => {
       if (ref.current) {
         ref.current.addEventListener('focus', handleFocus)
@@ -63,6 +64,7 @@ const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({ inputRefs, onClose })
       // Remove click event listener
       document.removeEventListener('mousedown', handleClickOutside)
 
+      // biome-ignore lint/complexity/noForEach: Rule needed for array iteration
       inputRefs.forEach((ref) => {
         if (ref.current) {
           ref.current.removeEventListener('focus', handleFocus)

@@ -2,8 +2,8 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 interface KioskStore {
-  kioskId: string
-  setKioskId: (kioskId: string) => void
+  kioskId: string | null
+  setKioskId: (kioskId: string | null) => void
 }
 
 const useKioskStore = create<KioskStore>()(

@@ -8,6 +8,8 @@ export default defineConfig({
   out: "./migrations",
   dialect: "postgresql",
   dbCredentials: {
+    // @ts-ignore
+    // biome-ignore lint/style/noNonNullAssertion: Get database url from env
     url: process.env.DATABASE_URL!,
   },
 });

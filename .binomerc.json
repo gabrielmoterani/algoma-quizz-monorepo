@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "@binome/a11y/label-has-associated-control": "off",
+    "@binome/a11y/alt-text": "off",
+    "@binome/jsx-a11y/label-has-for": "off",
+    "@binome/jsx-a11y/click-events-have-key-events": "off",
+    "@binome/jsx-a11y/no-static-element-interactions": "off"
+  }
+} 

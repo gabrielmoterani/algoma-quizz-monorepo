@@ -1,12 +1,13 @@
 import { useRef } from 'react'
-import VirtualKeyboard from '../renderer/src/components/VirtualKeyboard'
-import { writeKeyToFile } from '../utils/registerHandler'
+import VirtualKeyboard from '../components/VirtualKeyboard'
+import { writeKeyToFile } from '../../../utils/registerHandler'
 import toast from 'react-hot-toast'
-import { useKioskStore } from '@/store'
+import { useKioskStore, usePageStore } from '@/store'
 
 function Setup(): JSX.Element {
   const kioskId = useRef<HTMLInputElement>(null)
   const { setKioskId } = useKioskStore((state) => state)
+  const setPage = usePageStore((state) => state.setPage)
 
   const handleRegister = async () => {
     const loading = toast.loading('Registering kiosk...')
@@ -14,6 +15,7 @@ function Setup(): JSX.Element {
       const result = await writeKeyToFile(kioskId.current?.value as string)
       if (result) {
         setKioskId(kioskId.current?.value as string)
+        setPage('home')
         toast.success('Kiosk registered successfully')
       } else {
         toast.error('Failed to register kiosk')
