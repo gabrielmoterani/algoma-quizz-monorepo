@@ -3,6 +3,7 @@ import VirtualKeyboard from '../components/VirtualKeyboard'
 import { useEffect, useRef, useState } from 'react'
 import { findStudent, writeNewStudent } from '@/utils/registerHandler'
 import toast from 'react-hot-toast'
+import { COURSE_LIST } from '@/utils/courses'
 
 function Register(): JSX.Element {
   const { pagePayload, setPage } = usePageStore((state) => state)
@@ -14,42 +15,6 @@ function Register(): JSX.Element {
   const emailRef = useRef<HTMLInputElement>(null)
   const ageRef = useRef<HTMLInputElement>(null)
   const courseRef = useRef<HTMLSelectElement>(null)
-
-  const COURSE_LIST = [
-    { value: '0', label: 'ALL' },
-    { value: 'ADMN', label: 'ADMN' },
-    { value: 'ANII', label: 'ANII' },
-    { value: 'ANTR', label: 'ANTR' },
-    { value: 'AVIA', label: 'AVIA' },
-    { value: 'BIOL', label: 'BIOL' },
-    { value: 'CESD', label: 'CESD' },
-    { value: 'CHMI', label: 'CHMI' },
-    { value: 'COOP', label: 'COOP' },
-    { value: 'COSC', label: 'COSC' },
-    { value: 'ECON', label: 'ECON' },
-    { value: 'ENGL', label: 'ENGL' },
-    { value: 'ENVS', label: 'ENVS' },
-    { value: 'ESPA', label: 'ESPA' },
-    { value: 'FILM', label: 'FILM' },
-    { value: 'FRAN', label: 'FRAN' },
-    { value: 'GEOG', label: 'GEOG' },
-    { value: 'GEOL', label: 'GEOL' },
-    { value: 'HIST', label: 'HIST' },
-    { value: 'ITAL', label: 'ITAL' },
-    { value: 'ITEC', label: 'ITEC' },
-    { value: 'JURI', label: 'JURI' },
-    { value: 'MATH', label: 'MATH' },
-    { value: 'MUSC', label: 'MUSC' },
-    { value: 'OJIB', label: 'OJIB' },
-    { value: 'PHIL', label: 'PHIL' },
-    { value: 'PHYS', label: 'PHYS' },
-    { value: 'POLI', label: 'POLI' },
-    { value: 'PSYC', label: 'PSYC' },
-    { value: 'SOCI', label: 'SOCI' },
-    { value: 'STAT', label: 'STAT' },
-    { value: 'SWRK', label: 'SWRK' },
-    { value: 'VISA', label: 'VISA' }
-  ]
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -72,10 +37,7 @@ function Register(): JSX.Element {
     setIsSending(false)
     toast.dismiss(toastId)
     setPage('question', {
-      nickName: nickNameRef.current?.value,
-      email: emailRef.current?.value,
-      age: ageRef.current?.value,
-      course: courseRef.current?.value
+      studentId: pagePayload?.studentIdCard || pagePayload?.email
     })
   }
 
@@ -88,7 +50,7 @@ function Register(): JSX.Element {
       if (student) {
         setTimeout(() => {
           setPage('question', {
-            student
+            studentId: pagePayload?.studentIdCard || pagePayload?.email
           })
           setLoading(false)
         }, 1000)

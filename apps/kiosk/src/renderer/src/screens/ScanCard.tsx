@@ -46,6 +46,19 @@ function ScanCard(): JSX.Element {
           Start
         </button>
       </div>
+      <div className="flex flex-col justify-center items-center mt-10">
+        <button
+          type="button"
+          className="btn btn-ghost"
+          onClick={() =>
+            setPage('user', {
+              studentId: studentIdCardInputRef.current?.value || emailInputRef.current?.value
+            })
+          }
+        >
+          Go to student page
+        </button>
+      </div>
       <VirtualKeyboard inputRefs={[emailInputRef, studentIdCardInputRef]} />
     </div>
   )
