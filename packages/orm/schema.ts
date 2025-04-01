@@ -65,6 +65,13 @@ export const answers = pgTable("answers", {
   kioskId: uuid("kiosk_id").references(() => kiosks.id),
 });
 
+export const tips = pgTable("tips", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: varchar("name"),
+  title: varchar("title"),
+  subtitle: varchar("subtitle"),
+});
+
 // Relations
 export const studentsRelations = relations(students, ({ one }) => ({
   campus: one(campuses, {

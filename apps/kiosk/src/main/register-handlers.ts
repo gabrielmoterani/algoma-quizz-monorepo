@@ -49,6 +49,7 @@ export const registerIpcHandlers = async (): Promise<void> => {
         console.log('Key not found')
         return null
       }
+      console.log('filePath', filePath)
       const kioskData = await getKioskData(key)
       if (kioskData) {
         return kioskData.id

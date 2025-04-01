@@ -1,6 +1,6 @@
 import {
   retrieveQuestions,
-  retrieveRanking,
+  retrieveRankingByStudent,
   retrieveStudentUniqueAnswers
 } from '@/utils/registerHandler'
 import { useEffect, useState } from 'react'
@@ -50,12 +50,11 @@ function User(): JSX.Element {
       }
 
       try {
-        const ranking = [...((await retrieveRanking()) || [])]
-        if (ranking.length === 0) {
+        const ranking = await retrieveRankingByStudent(pagePayload?.studentId as string)
+        if (ranking === 0) {
           setNotAbleToGetPosition(true)
         } else {
-          const position = ranking.findIndex((student) => student[0] === pagePayload?.studentId)
-          setPosition(position + 1)
+          setPosition(ranking)
         }
       } catch (error) {
         toast.error('Failed to get ranking')
@@ -171,7 +170,7 @@ function User(): JSX.Element {
                                 </svg>
                               )}
                               <span className="font-medium">
-                                {isCorrectAnswer ? 'Correct Answer!' : 'Incorrect Answer'}
+                                {isCorrectAnswer ? 'You got it right!' : 'You got it wrong'}
                               </span>
                             </div>
                           </div>

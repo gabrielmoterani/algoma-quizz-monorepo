@@ -18,14 +18,13 @@ function Question(): JSX.Element {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: Not needed here
   useEffect(() => {
-    console.log(pagePayload)
     const fetchQuestion = async () => {
       setIsFetching(true)
       try {
         const questions = await retrieveQuestions()
-        console.log(questions)
+        const aux = questions.filter((x) => new Date(x.endDate as string) > new Date())
         const uniqueAnswers = await retrieveStudentUniqueAnswers(pagePayload.studentId as string)
-        const question = questions
+        const question = aux
           .reverse()
           .find((question) => !uniqueAnswers.includes(question.id as string))
         if (question) {

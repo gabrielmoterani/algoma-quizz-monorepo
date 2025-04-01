@@ -6,7 +6,8 @@ import type {
   categories,
   questions,
   kiosks,
-  answers
+  answers,
+  tips
 } from './schema';
 
 // User types
@@ -39,4 +40,8 @@ export type NewKiosk = typeof kiosks.$inferInsert;
 
 // Answer types
 export type Answer = typeof answers.$inferSelect;
-export type NewAnswer = typeof answers.$inferInsert; 
+export type NewAnswer = typeof answers.$inferInsert;
+
+// Tip types
+export type Tip = typeof tips.$inferSelect;
+export type NewTip = typeof tips.$inferInsert;
